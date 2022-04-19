@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Document</title>
+<style>
+@font-face{
+    font-family:'Sans Fransisco';
+    src:url('./SFNSDisplay-Regular.otf');
+}
+*{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    font-size:35px;
+    font-weight:bold;
+    color: dodgerblue;
+    font-weight: 400;
+}
+
+button{
+    border:none;
+    box-shadow:3px 3px 8px -3px black;
+    font-size:18px;
+    padding:5px 15px;
+    border-radius:8px;
+}
+
+.btn-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap:1rem;
+    flex-wrap: wrap;
+}
+
+.btn-wrapper > .android-btn,.ios-btn{
+    flex-basis: 44%;
+}
+
+.btn-wrapper > .checker-btn{
+    flex-basis:100%;
+    cursor: pointer;
+}
+
+.checker-btn:hover{
+    background-color: dodgerblue;
+    color:#fff;
+    transition: 300ms ease-in;
+}
+
+.isActive{
+    background:lightseagreen;
+    color:white;
+    font-weight:bold;
+    cursor: pointer;
+}
+
+.isDisabled{
+    background-color:gray;
+    color:#fff;
+    cursor:wait;
+}
+</style>
+</head>
+<body>
+    <h1>Mobile Os detector</h1>
+    <div class="btn-wrapper">
+    <button class="android-btn" title="You are on Android Operating System Device">Android Os</button>
+    <button class="ios-btn" title="You are on Ios Operating System Device">Ios Os</button>
+    <button class="checker-btn">Check current OS</button>
+</div>
+
+<script>
+// get some html elements
+const Body = document.body;
+const androidBtn = document.querySelector('.android-btn');
+const iosBtn = document.querySelector('.ios-btn');
+const checkerBtn = document.querySelector('.checker-btn');
+
+// function to detect current os
+checkerBtn.addEventListener('click', chechCurrentOs);
+
+// function chechCurrentOs()
+// {
+//     let userAgent = navigator.userAgent.toLowerCase();
+//     let isAndroid = userAgent.indexOf("android") > -1;
+//     let isIos = userAgent.indexOf("ios")
+
+//     if(isAndroid)
+//     {
+//         androidBtn.classList.add("isActive");
+//     }else{
+//         iosBtn.classList.add("isDisabled");
+//     }
+// }
+
+// OR
+function chechCurrentOs()
+{
+    const getUserAgent = navigator.userAgent;
+    if(/android/i.test(getUserAgent))
+    {
+        androidBtn.classList.add("isActive");
+    }
+    else if( /iPad|iPhone|iPod/.test(getUserAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchpoints > 1)
+    {
+        iosBtn.classList.add("isDisabled");
+        Body.style.fontFamily = " 'Sans Fransisco', ";
+    }
+    else{
+        alert("You are on other Os");
+    }
+}
+
+
+</script>
+</body>
+</html>
